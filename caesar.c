@@ -11,30 +11,20 @@ int main(int argc, string argv[]){
         return 1;
     } else {
         int key = atoi(argv[1])%26;
-        string plainText = get_string("plaintext: ");
+        string plaintext = get_string("plaintext: ");
+
         printf("ciphertext: ");
-        for (int i = 0, n = strlen(plainText); i < n; i++){
-            int castedChar = (int) plainText[i];
-            if(isalpha(castedChar)) {
-                if(islower(castedChar)) {
-                    if(122-key < castedChar) {
-                        printf("%c", (char)((castedChar+key)%122+96));
-                    } else {
-                        printf("%c", (char)(castedChar+key));
-                    }
-                } else {
-                    if(90-key < castedChar) {
-                        printf("%c", (char)((castedChar+key)%90+64));
-                    }
-                    else {
-                        printf("%c", (char)(castedChar+key));
-                    }
-                }
-            } else {
-                printf("%c", plainText[i]);
+        for (int i = 0, n = strlen(plaintext); i < n; i++){
+                //check if the letter is uppercase or lowercase then convert
+                if islower(plaintext[i])
+                    printf("%c", (((plaintext[i] + key) - 97) % 26) + 97);
+                else if isupper(plaintext[i])
+                    printf("%c", (((plaintext[i] + key) - 65) % 26) + 65);
+                //if neither then just print whatever it is
+                else
+                    printf("%c", plaintext[i]);
             }
-        }
-    printf("\n");
+            printf("\n");
+            return 0;
     }
-    return 0;
 }
